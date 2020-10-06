@@ -1,6 +1,9 @@
-__pycache__
-db.sqlite3
-/static
-/media
-.idea
+.DS_Store
 .vscode
+Project/db.sqlite3
+**/db.sqlite3
+__pycache__
+
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
