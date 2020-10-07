@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>yogiyo</title>
+  <title>Instagram</title>
   
   <link rel="stylesheet" href="{% static "bootstrap-4.5.2-dist/css/bootstrap.min.css" %}" />
   <script src="{% static "jquery-3.5.1.min.js" %}"></script>
@@ -12,6 +12,14 @@
 
 </head>
 <body>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags}}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
 
 <div class= "border-bottom mb-3">
   <div class="container">
