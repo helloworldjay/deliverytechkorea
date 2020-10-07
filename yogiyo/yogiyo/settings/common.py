@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Thrid Apps
     'bootstrap4',
     'debug_toolbar',
+    'django_pydenticon',
     # Locals Apps
     'accounts',
 
