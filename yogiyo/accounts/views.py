@@ -1,14 +1,18 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView, logout_then_login
-from .forms import SignupForm, ProfileForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import (LoginView, logout_then_login, PasswordChangeView as AuthPasswordChangeView)
+from .forms import SignupForm, ProfileForm, PasswordChangeForm
 from django.contrib import messages
+from django.urls import reverse_lazy
 
 
 # Create your views here.
 
 login = LoginView.as_view(template_name="accounts/login_form.html") # 로그인 form에서 로그인하는 내장함수
+
+
 
 def logout(request):
     messages.success(request, "로그아웃 되었습니다.") # 로그아웃 메세지 전송
@@ -43,3 +47,15 @@ def profile_edit(request):
     return render(request, "accounts/profile_edit_form.html", {
         "form" : form,
     })
+
+
+class PasswordChangView(LoginRequiredMixin, AuthPasswordChangeView):
+    success_url= reverse_lazy("password_change")
+    template_name = "accounts/password_change_form.html"
+    form_class = PasswordChangeForm
+
+    def form_valid(self, form):
+        messages.success(self.request, "암호를 변경했습니다.")
+        return super().form_valid(form)
+
+password_change = PasswordChangView.as_view()
