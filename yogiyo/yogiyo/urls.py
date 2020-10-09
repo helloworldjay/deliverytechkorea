@@ -10,6 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('', login_required(TemplateView.as_view(template_name='root.html')), name='root'), # login이 되어있을때만 진입 가능
+    path('', include('myway.urls')),
     path('identicon/image/<path:data>/', pydenticon_image, name='pydenticon_image'),
 ]
 
